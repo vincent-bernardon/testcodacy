@@ -1,6 +1,6 @@
 package um.fds.agl.ter23;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,7 +17,7 @@ public class DatabaseLoader implements CommandLineRunner {
     private final StudentRepository students;
     private final SubjectRepositories subject;
 
-    @Autowired
+
     public DatabaseLoader(TeacherRepository teachers, TERManagerRepository managers, StudentRepository students,
             SubjectRepositories subject) {
         this.teachers = teachers;

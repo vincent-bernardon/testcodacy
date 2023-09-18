@@ -8,13 +8,10 @@ import org.springframework.web.bind.annotation.*;
 import um.fds.agl.ter23.entities.Student;
 import um.fds.agl.ter23.forms.StudentForm;
 import um.fds.agl.ter23.services.StudentService;
-import um.fds.agl.ter23.services.TeacherService;
 
 @Controller
 public class StudentController {
 
-    @Autowired
-    private TeacherService teacherService;
     @Autowired
     private StudentService studentService;
 

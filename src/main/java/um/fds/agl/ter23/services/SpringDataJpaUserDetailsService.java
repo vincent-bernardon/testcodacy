@@ -1,6 +1,5 @@
 package um.fds.agl.ter23.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
@@ -15,7 +14,6 @@ public class SpringDataJpaUserDetailsService implements UserDetailsService {
 
     private final UserTERRepository repository;
 
-    @Autowired
     public SpringDataJpaUserDetailsService(UserTERRepository repository) {
         this.repository = repository;
     }
