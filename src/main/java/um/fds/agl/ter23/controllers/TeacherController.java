@@ -1,7 +1,6 @@
 package um.fds.agl.ter23.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,10 +20,11 @@ public class TeacherController {
 
     @GetMapping("/listTeachers")
     public Iterable<Teacher> getTeachers(Model model) {
-        Iterable<Teacher> teachers=teacherService.getTeachers();
+        Iterable<Teacher> teachers = teacherService.getTeachers();
         model.addAttribute("teachers", teachers);
         return teachers;
     }
+
     @PreAuthorize("hasRole('ROLE_MANAGER')")
     @GetMapping(value = { "/addTeacher" })
     public String showAddTeacherPage(Model model) {
@@ -35,33 +35,34 @@ public class TeacherController {
         return "addTeacher";
     }
 
-    @PostMapping(value = { "/addTeacher"})
+    @PostMapping(value = { "/addTeacher" })
     public String addTeacher(Model model, @ModelAttribute("TeacherForm") TeacherForm teacherForm) {
         Teacher t;
-        if(teacherService.findById(teacherForm.getId()).isPresent()){
+        if (teacherService.findById(teacherForm.getId()).isPresent()) {
             // teacher already existing : update
             t = teacherService.findById(teacherForm.getId()).get();
             t.setFirstName(teacherForm.getFirstName());
             t.setLastName(teacherForm.getLastName());
         } else {
             // teacher not existing : create
-            t=new Teacher(teacherForm.getFirstName(), teacherForm.getLastName(), terManagerService.getTERManager());
+            t = new Teacher(teacherForm.getFirstName(), teacherForm.getLastName(), terManagerService.getTERManager());
         }
         teacherService.saveTeacher(t);
         return "redirect:/listTeachers";
 
     }
 
-    @GetMapping(value = {"/showTeacherUpdateForm/{id}"})
-    public String showTeacherUpdateForm(Model model, @PathVariable(value = "id") long id){
+    @GetMapping(value = { "/showTeacherUpdateForm/{id}" })
+    public String showTeacherUpdateForm(Model model, @PathVariable(value = "id") long id) {
 
-        TeacherForm teacherForm = new TeacherForm(id, teacherService.findById(id).get().getFirstName(), teacherService.findById(id).get().getLastName());
+        TeacherForm teacherForm = new TeacherForm(id, teacherService.findById(id).get().getFirstName(),
+                teacherService.findById(id).get().getLastName());
         model.addAttribute("teacherForm", teacherForm);
         return "updateTeacher";
     }
 
-    @GetMapping(value = {"/deleteTeacher/{id}"})
-    public String deleteTeacher(Model model, @PathVariable(value = "id") long id){
+    @GetMapping(value = { "/deleteTeacher/{id}" })
+    public String deleteTeacher(Model model, @PathVariable(value = "id") long id) {
         teacherService.deleteTeacher(id);
         return "redirect:/listTeachers";
     }
