@@ -10,12 +10,13 @@
 <body>
   <h1>Create a Subjet:</h1>
 
-  <br />
+  <form th:action="@{/addSubject}" th:object="${subjectForm}" method="POST">
+    <Title>Add Subject</Title>:
+    <input type="text" th:field="*{title}" />
 
-  <!-- Check if errorMessage is not null and not empty -->
-
-  ...
-  </div>
+    <br />
+    <input type="submit" value="Create" />
+  </form>
 
 </body>
 

@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import um.fds.agl.ter23.entities.SubjectTER;
+import um.fds.agl.ter23.forms.SubjectForm;
 import um.fds.agl.ter23.services.SubjectService;
 
 @Controller
@@ -19,5 +20,12 @@ public class SubjectController {
     model.addAttribute("subjects", sujetTERServices.getSubjectList());
     System.out.println("sujetTERServices.getSubjectList() : " + sujetTERServices.getSubjectList());
     return sujetTERServices.getSubjectList();
+  }
+
+  @GetMapping("/addSubject")
+  public String showAddSubjectPage(Model model) {
+    SubjectForm subject = new SubjectForm();
+    model.addAttribute("subjectForm", subject);
+    return "addSubject";
   }
 }
