@@ -17,11 +17,12 @@
 
             <tr>
                 <th>First Name</th>
+                <th>Teacher Name</th>
 
             </tr>
             <tr th:each="subject : ${subjects}">
                 <td th:utext="${subject.title}">...</td>
-
+                <td th:utext="${subject.teacher.lastName}">...</td>
             </tr>
         </table>
     </div>

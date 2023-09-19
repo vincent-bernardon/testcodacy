@@ -10,14 +10,24 @@
 <body>
   <h1>Create a Subjet:</h1>
 
-  <form th:action="@{/addSubject}" th:object="${subjectForm}" method="POST">
-    <Title>Add Subject</Title>:
-    <input type="text" th:field="*{title}" />
+  <form th:action="@{/addSubject}" th:object="${subjectForm}" method="POST" onsubmit="logSubmit">
+    <Title>Add Subject :</Title>
+    <label for="title">
+      <title></title>
+    </label>
+    <input id="title" type="text" th:field="*{title}" /><br />
+    <label for="tlist">Teacher list</label>
+    <select name="teacher" id="tlist">
+      <option value="">--Please choose a teacher--</option>
+      <option th:each="teacher : ${teachers}" th:value="${teacher.id}" th:text="${teacher.lastName}"></option>
+    </select>
 
     <br />
     <input type="submit" value="Create" />
   </form>
 
 </body>
+
+
 
 </html>

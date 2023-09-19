@@ -21,4 +21,8 @@ public class SubjectService {
     return subjectList;
 
   }
+
+  public void saveSubject(SubjectTER subject) {
+    subjectRepository.save(subject);
+  }
 }
