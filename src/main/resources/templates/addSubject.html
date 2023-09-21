@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Add Subject</title>
+  <link rel="stylesheet" href="/main.css" />
+</head>
+
+<body>
+  <h1>Create a Subject:</h1>
+
+  <form th:action="@{/addSubject}" th:object="${subjectForm}" method="POST" onsubmit="logSubmit">
+    <Title>Add Subject :</Title>
+
+    <input id="title" type="text" th:field="*{title}" /><br />
+    <label for="tlist">Teacher list</label>
+    <select name="id" id="id">
+      <option value="">--Please choose a teacher--</option>
+      <option th:each="teacher : ${teachers}" th:value="${teacher.id}" th:text="${teacher.lastName}"></option>
+    </select>
+    <br />
+    <input type="submit" value="Create" />
+  </form>
+
+</body>
+
+
+
+</html>

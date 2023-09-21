@@ -7,8 +7,6 @@ import um.fds.agl.ter23.repositories.TeacherRepository;
 
 import java.util.Optional;
 
-
-
 @Service
 public class TeacherService {
 
