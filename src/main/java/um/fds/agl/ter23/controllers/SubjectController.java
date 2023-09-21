@@ -51,13 +51,26 @@ public class SubjectController {
     return "redirect:/listSubject";
   }
 
-
   @GetMapping(value = { "/updateSubject/{id}" })
-  public String updateSubject(Model model, @ModelAttribute("SubjectForm") SubjectForm subjectForm) {
+  public String updateSubjectPage(Model model, @ModelAttribute("SubjectForm") SubjectForm subjectForm) {
     SubjectForm subject = new SubjectForm();
     model.addAttribute("subjectForm", subject);
     model.addAttribute("teachers", teacherService.getTeachers());
     return "updateSubject";
+  }
+
+  @PostMapping(value = { "/updateSubject/{id}" })
+  public String updateSubject(Model model, @ModelAttribute("SubjectForm") SubjectForm subjectForm) {
+    SubjectTER subject = new SubjectTER(subjectForm.getTitle(),
+        teacherService.getTeacher(subjectForm.getId()).get());
+    sujetTERServices.saveSubject(subject);
+    return "redirect:/listSubject";
+  }
+
+  @GetMapping(value = { "/deleteSubject/{id}" })
+  public String deleteSubject(Model model, @ModelAttribute("SubjectForm") SubjectForm subjectForm) {
+    sujetTERServices.deleteSubject(subjectForm.getId());
+    return "redirect:/listSubject";
   }
 
 }
