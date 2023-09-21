@@ -21,7 +21,6 @@
       <option value="">--Please choose a teacher--</option>
       <option th:each="teacher : ${teachers}" th:value="${teacher.id}" th:text="${teacher.lastName}"></option>
     </select>
-
     <br />
     <input type="submit" value="Create" />
   </form>
