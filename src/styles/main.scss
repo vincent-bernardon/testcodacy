@@ -4,12 +4,14 @@ input.field {
 
 table {
   border-collapse: collapse;
+  border: none;
 }
 
 td,
 th {
-  border: 1px solid #999;
-  padding: 0.5rem;
+
+  border: 1px solid #ffffff;
+  padding: 1rem;
   text-align: left;
 }
 
@@ -38,6 +40,7 @@ a {
   border-radius: 5px;
   padding: 0.5rem;
   box-shadow: 0 0 5px #000000;
+  margin: 10px;
 
 }
 
