@@ -51,4 +51,13 @@ public class SubjectController {
     return "redirect:/listSubject";
   }
 
+
+  @GetMapping(value = { "/updateSubject/{id}" })
+  public String updateSubject(Model model, @ModelAttribute("SubjectForm") SubjectForm subjectForm) {
+    SubjectForm subject = new SubjectForm();
+    model.addAttribute("subjectForm", subject);
+    model.addAttribute("teachers", teacherService.getTeachers());
+    return "updateSubject";
+  }
+
 }
