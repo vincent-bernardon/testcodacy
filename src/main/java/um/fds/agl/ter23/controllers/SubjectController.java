@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import um.fds.agl.ter23.entities.SubjectTER;
@@ -23,11 +24,11 @@ public class SubjectController {
   @GetMapping("/listSubject") // support of the "/" route
   public Iterable<SubjectTER> listSubject(Model model) {
     model.addAttribute("subjects", sujetTERServices.getSubjectList());
-    System.out.println("sujetTERServices.getSubjectList() : " + sujetTERServices.getSubjectList());
+
     return sujetTERServices.getSubjectList();
   }
 
-  @GetMapping("/addSubject")
+  @GetMapping(value = { "/addSubject" })
   public String showAddSubjectPage(Model model) {
     SubjectForm subject = new SubjectForm();
     model.addAttribute("subjectForm", subject);
@@ -36,9 +37,7 @@ public class SubjectController {
   }
 
   @PostMapping(value = { "/addSubject" })
-  public String addSubject(Model model, SubjectForm subjectForm) {
-
-    System.out.println("subjectForm : " + subjectForm);
+  public String addSubject(Model model, @ModelAttribute("SubjectForm") SubjectForm subjectForm) {
 
     SubjectTER subject = new SubjectTER(subjectForm.getTitle(),
         teacherService.getTeacher(subjectForm.getId()).get());
