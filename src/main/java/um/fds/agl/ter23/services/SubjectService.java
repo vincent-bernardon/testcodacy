@@ -25,4 +25,9 @@ public class SubjectService {
   public void saveSubject(SubjectTER subject) {
     subjectRepository.save(subject);
   }
+
+  public void deleteSubject(long id) {
+    subjectRepository.deleteById(id);
+  }
+
 }
