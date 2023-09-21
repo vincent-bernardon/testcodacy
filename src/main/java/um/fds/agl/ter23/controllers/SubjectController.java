@@ -39,6 +39,11 @@ public class SubjectController {
   @PostMapping(value = { "/addSubject" })
   public String addSubject(Model model, @ModelAttribute("SubjectForm") SubjectForm subjectForm) {
 
+    if (teacherService.getTeacher(subjectForm.getId()).isEmpty()) {
+      System.out.println("Teacher not found");
+      return "redirect:/addSubject";
+    }
+
     SubjectTER subject = new SubjectTER(subjectForm.getTitle(),
         teacherService.getTeacher(subjectForm.getId()).get());
     sujetTERServices.saveSubject(subject);
