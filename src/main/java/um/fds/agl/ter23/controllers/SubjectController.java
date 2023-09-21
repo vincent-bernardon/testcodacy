@@ -40,7 +40,8 @@ public class SubjectController {
   public String addSubject(Model model, @ModelAttribute("SubjectForm") SubjectForm subjectForm) {
 
     if (teacherService.getTeacher(subjectForm.getId()).isEmpty()) {
-      System.out.println("Teacher not found");
+      System.out.println("\u001B[31m [log:error]Teacher not found for id  \u001B[0m");
+      System.out.println(subjectForm.getId());
       return "redirect:/addSubject";
     }
 
