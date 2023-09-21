@@ -1,0 +1,14 @@
+{
+  "name": "aglter23",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://gitlab.etu.umontpellier.fr/e20190005676/aglter23.git",
+  "author": "DrHurel <jeremyhurel34@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "sass": "^1.68.0"
+  },
+  "scripts": {
+    "style": "sass ./src/styles/main.scss ./src/main/resources/static/main.css --style compressed"
+  }
+}
