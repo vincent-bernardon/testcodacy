@@ -25,7 +25,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(UserTER.PASSWORD_ENCODER);
     }
 
-    @Override
+    @Override // warning comes from project version ignore it
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
