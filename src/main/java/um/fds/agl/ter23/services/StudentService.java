@@ -5,8 +5,6 @@ import org.springframework.stereotype.Service;
 import um.fds.agl.ter23.entities.Student;
 import um.fds.agl.ter23.repositories.StudentRepository;
 
-import java.util.Optional;
-
 @Service
 public class StudentService {
 
