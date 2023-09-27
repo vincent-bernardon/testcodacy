@@ -54,7 +54,6 @@ public class SubjectController {
 
   @GetMapping(value = { "/updateSubject/{id}" })
   public String updateSubjectPage(Model model, @PathVariable(value = "id") String id) {
-
     SubjectForm subject = new SubjectForm();
     model.addAttribute("subjectForm", subject);
     model.addAttribute("subjectData",
@@ -65,9 +64,6 @@ public class SubjectController {
 
   @PostMapping(value = { "/updateSubject" })
   public String updateSubject(Model model, @ModelAttribute("SubjectForm") SubjectForm subjectForm) {
-    if (true) {
-      System.out.println("\u001B[31m [log:proof] load  \u001B[0m");
-    }
     SubjectTER subject = sujetTERServices.getSubject(subjectForm.getId());
     subject.setTitle(subjectForm.getTitle());
     subject.setTeacher(teacherService.getTeacher(subjectForm.getTeacherId()).get());
