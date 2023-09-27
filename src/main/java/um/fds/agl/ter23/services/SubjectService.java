@@ -1,5 +1,8 @@
 package um.fds.agl.ter23.services;
 
+import javax.swing.text.html.Option;
+
+import org.apache.el.stream.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +31,11 @@ public class SubjectService {
 
   public void deleteSubject(long id) {
     subjectRepository.deleteById(id);
+  }
+
+  public SubjectTER getSubject(long id) {
+    System.out.println("\u001B[31m [log:proof] GET SUBJECT  \u001B[0m");
+    return subjectRepository.findById(id).get();
   }
 
 }

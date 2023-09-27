@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import um.fds.agl.ter23.entities.SubjectTER;
@@ -52,9 +53,14 @@ public class SubjectController {
   }
 
   @GetMapping(value = { "/updateSubject/{id}" })
-  public String updateSubjectPage(Model model, @ModelAttribute("SubjectForm") SubjectForm subjectForm) {
+  public String updateSubjectPage(Model model, @PathVariable String id) {
+    if (true) {
+      System.out.println("\u001B[31m [log:proof] load  \u001B[0m");
+    }
     SubjectForm subject = new SubjectForm();
     model.addAttribute("subjectForm", subject);
+    model.addAttribute("subjectData",
+        sujetTERServices.getSubject(Long.parseLong(id)));
     model.addAttribute("teachers", teacherService.getTeachers());
     return "updateSubject";
   }
