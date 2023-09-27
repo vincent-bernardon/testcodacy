@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import um.fds.agl.ter23.entities.SubjectTER;
+import um.fds.agl.ter23.entities.Teacher;
 import um.fds.agl.ter23.forms.SubjectForm;
 import um.fds.agl.ter23.services.SubjectService;
 import um.fds.agl.ter23.services.TeacherService;
@@ -39,15 +40,12 @@ public class SubjectController {
 
   @PostMapping(value = { "/addSubject" })
   public String addSubject(Model model, @ModelAttribute("SubjectForm") SubjectForm subjectForm) {
-
-    if (teacherService.getTeacher(subjectForm.getTeacherId()).isEmpty()) {
-      System.out.println("\u001B[31m [log:error]Teacher not found for id  \u001B[0m");
-      System.out.println(subjectForm.getTeacherId());
+    Teacher teacher = teacherService.getTeacher(subjectForm.getTeacherId());
+    if (teacher == null) {
       return "redirect:/addSubject";
     }
 
-    SubjectTER subject = new SubjectTER(subjectForm.getTitle(),
-        teacherService.getTeacher(subjectForm.getTeacherId()).get());
+    SubjectTER subject = new SubjectTER(subjectForm.getTitle(), teacher);
     sujetTERServices.saveSubject(subject);
     return "redirect:/listSubject";
   }
@@ -66,8 +64,15 @@ public class SubjectController {
   public String updateSubject(Model model, @ModelAttribute("SubjectForm") SubjectForm subjectForm) {
     SubjectTER subject = sujetTERServices.getSubject(subjectForm.getId());
     subject.setTitle(subjectForm.getTitle());
-    subject.setTeacher(teacherService.getTeacher(subjectForm.getTeacherId()).get());
+
+    Teacher teacher = teacherService.getTeacher(subjectForm.getTeacherId());
+    if (teacher == null) {
+      return "redirect:/updateSubject/" + subjectForm.getId();
+    }
+
+    subject.setTeacher(teacher);
     sujetTERServices.saveSubject(subject);
+
     return "redirect:/listSubject";
   }
 

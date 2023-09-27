@@ -37,10 +37,8 @@ public class TeacherController {
 
     @PostMapping(value = { "/addTeacher" })
     public String addTeacher(Model model, @ModelAttribute("TeacherForm") TeacherForm teacherForm) {
-        Teacher t;
-        if (teacherService.findById(teacherForm.getId()).isPresent()) {
-            // teacher already existing : update
-            t = teacherService.findById(teacherForm.getId()).get();
+        Teacher t = teacherService.getTeacher(teacherForm.getId());
+        if (t != null) {
             t.setFirstName(teacherForm.getFirstName());
             t.setLastName(teacherForm.getLastName());
         } else {
@@ -54,9 +52,12 @@ public class TeacherController {
 
     @GetMapping(value = { "/showTeacherUpdateForm/{id}" })
     public String showTeacherUpdateForm(Model model, @PathVariable(value = "id") long id) {
-
-        TeacherForm teacherForm = new TeacherForm(id, teacherService.findById(id).get().getFirstName(),
-                teacherService.findById(id).get().getLastName());
+        Teacher t = teacherService.getTeacher(id);
+        if (t == null) {
+            return "redirect:/addTeacher";
+        }
+        TeacherForm teacherForm = new TeacherForm(id, t.getFirstName(),
+                t.getLastName());
         model.addAttribute("teacherForm", teacherForm);
         return "updateTeacher";
     }

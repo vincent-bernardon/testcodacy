@@ -13,8 +13,13 @@ public class TeacherService {
     @Autowired
     private TeacherRepository teacherRepository;
 
-    public Optional<Teacher> getTeacher(final Long id) {
-        return teacherRepository.findById(id);
+    public Teacher getTeacher(final Long id) {
+        if (!teacherRepository.existsById(id)) {
+            System.out.println("\u001B[31m [log:error]Teacher not found for id  \u001B[0m");
+            System.out.println(id);
+            return null;
+        }
+        return teacherRepository.findById(id).get();
     }
 
     public Iterable<Teacher> getTeachers() {
@@ -28,10 +33,6 @@ public class TeacherService {
     public Teacher saveTeacher(Teacher teacher) {
         Teacher savedTeacher = teacherRepository.save(teacher);
         return savedTeacher;
-    }
-
-    public Optional<Teacher> findById(long id) {
-        return teacherRepository.findById(id);
     }
 
 }

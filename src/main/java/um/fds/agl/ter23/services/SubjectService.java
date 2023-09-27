@@ -29,8 +29,14 @@ public class SubjectService {
     subjectRepository.save(subject);
   }
 
-  public void deleteSubject(long id) {
+  public int deleteSubject(long id) {
+    if (!subjectRepository.existsById(id)) {
+      System.out.println("\u001B[31m [log:error]Subject not found for id  \u001B[0m");
+      System.out.println(id);
+      return -1;
+    }
     subjectRepository.deleteById(id);
+    return 0;
   }
 
   public SubjectTER getSubject(long id) {
