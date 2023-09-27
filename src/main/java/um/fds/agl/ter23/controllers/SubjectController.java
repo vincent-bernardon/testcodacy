@@ -40,23 +40,21 @@ public class SubjectController {
   @PostMapping(value = { "/addSubject" })
   public String addSubject(Model model, @ModelAttribute("SubjectForm") SubjectForm subjectForm) {
 
-    if (teacherService.getTeacher(subjectForm.getId()).isEmpty()) {
+    if (teacherService.getTeacher(subjectForm.getTeacherId()).isEmpty()) {
       System.out.println("\u001B[31m [log:error]Teacher not found for id  \u001B[0m");
-      System.out.println(subjectForm.getId());
+      System.out.println(subjectForm.getTeacherId());
       return "redirect:/addSubject";
     }
 
     SubjectTER subject = new SubjectTER(subjectForm.getTitle(),
-        teacherService.getTeacher(subjectForm.getId()).get());
+        teacherService.getTeacher(subjectForm.getTeacherId()).get());
     sujetTERServices.saveSubject(subject);
     return "redirect:/listSubject";
   }
 
   @GetMapping(value = { "/updateSubject/{id}" })
-  public String updateSubjectPage(Model model, @PathVariable String id) {
-    if (true) {
-      System.out.println("\u001B[31m [log:proof] load  \u001B[0m");
-    }
+  public String updateSubjectPage(Model model, @PathVariable(value = "id") String id) {
+
     SubjectForm subject = new SubjectForm();
     model.addAttribute("subjectForm", subject);
     model.addAttribute("subjectData",
@@ -65,17 +63,21 @@ public class SubjectController {
     return "updateSubject";
   }
 
-  @PostMapping(value = { "/updateSubject/{id}" })
+  @PostMapping(value = { "/updateSubject" })
   public String updateSubject(Model model, @ModelAttribute("SubjectForm") SubjectForm subjectForm) {
-    SubjectTER subject = new SubjectTER(subjectForm.getTitle(),
-        teacherService.getTeacher(subjectForm.getId()).get());
+    if (true) {
+      System.out.println("\u001B[31m [log:proof] load  \u001B[0m");
+    }
+    SubjectTER subject = sujetTERServices.getSubject(subjectForm.getId());
+    subject.setTitle(subjectForm.getTitle());
+    subject.setTeacher(teacherService.getTeacher(subjectForm.getTeacherId()).get());
     sujetTERServices.saveSubject(subject);
     return "redirect:/listSubject";
   }
 
   @GetMapping(value = { "/deleteSubject/{id}" })
   public String deleteSubject(Model model, @ModelAttribute("SubjectForm") SubjectForm subjectForm) {
-    sujetTERServices.deleteSubject(subjectForm.getId());
+    sujetTERServices.deleteSubject(subjectForm.getTeacherId());
     return "redirect:/listSubject";
   }
 

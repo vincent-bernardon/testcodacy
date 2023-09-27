@@ -35,6 +35,11 @@ public class SubjectService {
 
   public SubjectTER getSubject(long id) {
     System.out.println("\u001B[31m [log:proof] GET SUBJECT  \u001B[0m");
+    if (!subjectRepository.existsById(id)) {
+      System.out.println("\u001B[31m [log:error]Subject not found for id  \u001B[0m");
+      System.out.println(id);
+      return null;
+    }
     return subjectRepository.findById(id).get();
   }
 

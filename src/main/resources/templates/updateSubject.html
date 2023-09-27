@@ -11,12 +11,12 @@
     <h1>Update a Subject:</h1>
 
     <form th:action="@{/updateSubject}" th:object="${subjectForm}" method="POST">
-        <input type="hidden" th:field="*{id}" />
+        <input type="hidden" name="id" id="id" th:value="${subjectData.id}" />
         Title:
         <input type="text" th:field="*{title}" th:placeholder="${subjectData.title}" />
         <br />
         Teacher:
-        <select name="id" id="id">
+        <select title="teacher selection" name="teacherId" id="teacherId">
             <option th:value="${subjectData.teacher.id}" th:text="${subjectData.teacher.lastName}"></option>
             <option th:each="teacher : ${teachers}" th:value="${teacher.id}" th:text="${teacher.lastName}"></option>
         </select>
