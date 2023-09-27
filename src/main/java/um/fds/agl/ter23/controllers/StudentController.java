@@ -33,9 +33,8 @@ public class StudentController {
 
     @PostMapping(value = { "/addStudent" })
     public String addStudent(Model model, @ModelAttribute("StudentForm") StudentForm studentForm) {
-        Student student;
-        if (studentService.findById(studentForm.getId()).isPresent()) {
-            student = studentService.findById(studentForm.getId()).get();
+        Student student = studentService.getStudent(studentForm.getId());
+        if (student != null) {
             student.setFirstName(studentForm.getFirstName());
             student.setLastName(studentForm.getLastName());
         } else {
@@ -49,8 +48,11 @@ public class StudentController {
     @GetMapping(value = { "/showStudentUpdateForm/{id}" })
     public String showStudentUpdateForm(Model model, @PathVariable(value = "id") long id) {
 
-        StudentForm studentForm = new StudentForm(id, studentService.findById(id).get().getFirstName(),
-                studentService.findById(id).get().getLastName());
+        Student s = studentService.getStudent(id);
+        if (s == null) {
+            return "redirect:/addStudent";
+        }
+        StudentForm studentForm = new StudentForm(id, s.getFirstName(), s.getLastName());
         model.addAttribute("studentForm", studentForm);
         return "updateStudent";
     }

@@ -11,10 +11,15 @@ public class TeacherService {
     @Autowired
     private TeacherRepository teacherRepository;
 
+    /**
+     * Get a teacher by id
+     * If the teacher does not exist, return null
+     * 
+     * @param id
+     * @return
+     */
     public Teacher getTeacher(final Long id) {
         if (!teacherRepository.existsById(id)) {
-            System.out.println("\u001B[31m [log:error]Teacher not found for id  \u001B[0m");
-            System.out.println(id);
             return null;
         }
         return teacherRepository.findById(id).get();
