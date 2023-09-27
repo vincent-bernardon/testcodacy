@@ -76,8 +76,8 @@ public class SubjectController {
   }
 
   @GetMapping(value = { "/deleteSubject/{id}" })
-  public String deleteSubject(Model model, @ModelAttribute("SubjectForm") SubjectForm subjectForm) {
-    sujetTERServices.deleteSubject(subjectForm.getTeacherId());
+  public String deleteSubject(Model model, @PathVariable(value = "id") String id) {
+    sujetTERServices.deleteSubject(Long.parseLong(id));
     return "redirect:/listSubject";
   }
 
