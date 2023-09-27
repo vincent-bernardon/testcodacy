@@ -15,7 +15,7 @@
 
     <input id="title" type="text" th:field="*{title}" /><br />
     <label for="tlist">Teacher list</label>
-    <select name="id" id="id">
+    <select title="teacher selection" name="teacherId" id="teacherId">
       <option value="">--Please choose a teacher--</option>
       <option th:each="teacher : ${teachers}" th:value="${teacher.id}" th:text="${teacher.lastName}"></option>
     </select>
