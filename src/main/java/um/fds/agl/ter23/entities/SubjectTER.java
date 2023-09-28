@@ -1,9 +1,8 @@
 package um.fds.agl.ter23.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import org.hibernate.annotations.ManyToAny;
+
+import javax.persistence.*;
 
 @Entity
 public class SubjectTER {
@@ -12,6 +11,7 @@ public class SubjectTER {
   private String title;
 
   private @ManyToOne Teacher teacher;
+  private @ManyToOne Teacher teacherSec;
 
   public Long getId() {
     return id;
@@ -37,12 +37,27 @@ public class SubjectTER {
     this.teacher = teacher;
   }
 
+  public Teacher getTeacherSec() {
+    return teacherSec;
+  }
+
+  public void setTeacherSec(Teacher teacherSec) {
+    this.teacherSec = teacherSec;
+  }
+
   public SubjectTER() {
   }
 
   public SubjectTER(String title, Teacher teacher) {
     this.title = title;
     this.teacher = teacher;
+
+  }
+
+  public SubjectTER(String title, Teacher teacher, Teacher teacherSec) {
+    this.title = title;
+    this.teacher = teacher;
+    this.teacherSec = teacherSec;
   }
 
   @Override
@@ -58,6 +73,8 @@ public class SubjectTER {
       return false;
     if (!getTitle().equals(sujet.getTitle()))
       return false;
+    if(!getTeacherSec().equals(sujet.getTeacherSec()))
+      return false;
 
     return getTeacher().equals(sujet.getTeacher());
 
@@ -68,6 +85,8 @@ public class SubjectTER {
     int result = getId().hashCode();
     result = 31 * result + getTitle().hashCode();
     result = 31 * result + getTeacher().hashCode();
+    result = 31 * result + getTeacherSec().hashCode();
+
 
     return result;
   }

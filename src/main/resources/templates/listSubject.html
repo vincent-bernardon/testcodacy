@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <h1>Student List</h1>
+    <h1>Subject List</h1>
     <a href="/">Accueil</a>
     <a href="addSubject">Add Subject</a>
     <br /><br />
@@ -16,16 +16,25 @@
         <table border="1">
 
             <tr>
-                <th>First Name</th>
-                <th>Teacher Name</th>
+                <th>Title</th>
+                <th>Supervisor Teacher Name</th>
+                <th>Secondary Supervisor Teacher Name</th>
                 <th>option</th>
             </tr>
             <tr th:each="subject : ${subjects}">
                 <td th:utext="${subject.title}">...</td>
                 <td th:utext="${subject.teacher.lastName}">...</td>
+                <div>
+                    <td>
+                        <span th:if="${subject.teacherSec}" th:utext="${subject.teacherSec.lastName}">...</span>
+                        <span th:unless="${subject.teacherSec}">None</span>
+                    </td>
+                </div>
                 <td><a th:href="@{/updateSubject/{id}(id=${subject.id})}">Update</a>
                     <a th:href="@{/deleteSubject/{id}(id=${subject.id})}">Delete</a>
                 </td>
+
+
             </tr>
         </table>
     </div>

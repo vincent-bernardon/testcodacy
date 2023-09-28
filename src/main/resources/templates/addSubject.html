@@ -14,8 +14,14 @@
     <Title>Add Subject :</Title>
 
     <input id="title" type="text" th:field="*{title}" /><br />
-    <label for="tlist">Teacher list</label>
+    <label for="teacherId">Supervisor Teacher list</label>
     <select title="teacher selection" name="teacherId" id="teacherId">
+      <option value="">--Please choose a teacher--</option>
+      <option th:each="teacher : ${teachers}" th:value="${teacher.id}" th:text="${teacher.lastName}"></option>
+    </select>
+    <br />
+    <label for="teacherSecId">Secondary Supervisor Teacher list</label>
+    <select title="teacher selection" name="teacherSecId" id="teacherSecId" th:field="*{teacherSec}">
       <option value="">--Please choose a teacher--</option>
       <option th:each="teacher : ${teachers}" th:value="${teacher.id}" th:text="${teacher.lastName}"></option>
     </select>

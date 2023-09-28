@@ -41,12 +41,22 @@ public class SubjectController {
   @PostMapping(value = { "/addSubject" })
   public String addSubject(Model model, @ModelAttribute("SubjectForm") SubjectForm subjectForm) {
     Teacher teacher = teacherService.getTeacher(subjectForm.getTeacherId());
+    Teacher teachersec = subjectForm.getTeacherSec();
+    System.out.println("teachersec="+teachersec);
     if (teacher == null) {
       return "redirect:/addSubject";
     }
-
-    SubjectTER subject = new SubjectTER(subjectForm.getTitle(), teacher);
+    SubjectTER subject;
+    if(teachersec == null){
+      System.out.println("ici");
+      subject = new SubjectTER(subjectForm.getTitle(), teacher);
+    }else{
+      System.out.println("la");
+      subject = new SubjectTER(subjectForm.getTitle(), teacher, teachersec);
+    }
+    System.out.println("avant");
     sujetTERServices.saveSubject(subject);
+    System.out.println("après");
     return "redirect:/listSubject";
   }
 
@@ -54,9 +64,9 @@ public class SubjectController {
   public String updateSubjectPage(Model model, @PathVariable(value = "id") String id) {
     SubjectForm subject = new SubjectForm();
     model.addAttribute("subjectForm", subject);
-    model.addAttribute("subjectData",
-        sujetTERServices.getSubject(Long.parseLong(id)));
+    model.addAttribute("subjectData", sujetTERServices.getSubject(Long.parseLong(id)));
     model.addAttribute("teachers", teacherService.getTeachers());
+    model.addAttribute("teacherSec",sujetTERServices.getSubject(Long.parseLong(id)).getTeacherSec());
     return "updateSubject";
   }
 
@@ -66,11 +76,13 @@ public class SubjectController {
     subject.setTitle(subjectForm.getTitle());
 
     Teacher teacher = teacherService.getTeacher(subjectForm.getTeacherId());
+    Teacher teachersec = subjectForm.getTeacherSec();
     if (teacher == null) {
       return "redirect:/updateSubject/" + subjectForm.getId();
     }
 
     subject.setTeacher(teacher);
+    subject.setTeacherSec(teachersec);
     sujetTERServices.saveSubject(subject);
 
     return "redirect:/listSubject";
