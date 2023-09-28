@@ -1,5 +1,6 @@
 package um.fds.agl.ter23.entities;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -18,6 +19,11 @@ public class Groupe {
   private Set<Student> students;
 
   public Groupe() {
+  }
+
+  public Groupe(String title) {
+    this.title = title;
+    this.students = new HashSet<Student>();
   }
 
   public Groupe(String title, Set<Student> students) {
