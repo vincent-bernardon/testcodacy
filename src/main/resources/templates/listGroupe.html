@@ -9,9 +9,28 @@
 
 <body>
   <h1>List Groupe</h1>
-  <section>
-    empty
-  </section>
+  <a href="/">Accueil</a>
+  <a href="addGroupe">Add Groupe</a>
+  <br /><br />
+  <div>
+    <table border="1">
+
+      <tr>
+        <th>Groupe Name</th>
+        <th>Students Names</th>
+        <th>option</th>
+      </tr>
+      <tr th:each="Groupe : ${Groupes}">
+        <td th:utext="${Groupe.title}">...</td>
+        <td>
+          <span th:each="student : ${Groupe.students}" th:text="${student.lastName}"></span>
+        </td>
+        <td><a th:href="@{/updateSubject/{id}(id=${Groupe.id})}">Update</a>
+          <a th:href="@{/deleteSubject/{id}(id=${Groupe.id})}">Delete</a>
+        </td>
+      </tr>
+    </table>
+  </div>
 </body>
 
 </html>
