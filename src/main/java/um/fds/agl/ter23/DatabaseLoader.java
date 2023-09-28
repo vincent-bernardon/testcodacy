@@ -1,7 +1,6 @@
 package um.fds.agl.ter23;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -49,7 +48,7 @@ public class DatabaseLoader implements CommandLineRunner {
                 this.subject.save(new SubjectTER("TER", t1));
                 this.subject.save(new SubjectTER("GL", t2));
 
-                Set<Student> students = new HashSet<Student>();
+                ArrayList<Student> students = new ArrayList<Student>();
                 students.add(s1);
                 students.add(s2);
                 this.groupe.save(new Groupe("test", students));
