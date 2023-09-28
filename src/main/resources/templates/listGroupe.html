@@ -22,7 +22,7 @@
       </tr>
       <tr th:each="Groupe : ${Groupes}">
         <td th:utext="${Groupe.title}">...</td>
-        <td>
+        <td class="spaced">
           <span th:each="student : ${Groupe.students}" th:text="${student.lastName}"></span>
         </td>
         <td><a th:href="@{/updateSubject/{id}(id=${Groupe.id})}">Update</a>
@@ -32,5 +32,12 @@
     </table>
   </div>
 </body>
+<style>
+  .spaced {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+  }
+</style>
 
 </html>
