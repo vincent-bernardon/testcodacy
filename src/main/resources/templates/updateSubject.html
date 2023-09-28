@@ -15,9 +15,19 @@
         Title:
         <input type="text" th:field="*{title}" th:placeholder="${subjectData.title}" />
         <br />
-        Teacher:
+        Secondary Supervisor Teacher:
         <select title="teacher selection" name="teacherId" id="teacherId">
             <option th:value="${subjectData.teacher.id}" th:text="${subjectData.teacher.lastName}"></option>
+            <option th:each="teacher : ${teachers}" th:value="${teacher.id}" th:text="${teacher.lastName}"></option>
+        </select>
+        <br />
+
+        Supervisor Teacher:
+        <select title="teacher selection" name="teacherSecId" id="teacherSecId" th:field="*{teacherSec}">
+            <div>
+                <option th:if="${teacherSec}" th:value="${teacherSec.id}" th:text="${teacherSec.lastName}"></option>
+                <option th:unless="${teacherSec}" value="">--Please choose a teacher--</option>
+            </div>
             <option th:each="teacher : ${teachers}" th:value="${teacher.id}" th:text="${teacher.lastName}"></option>
         </select>
         <br />
