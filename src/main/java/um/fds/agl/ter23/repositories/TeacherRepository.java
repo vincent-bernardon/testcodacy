@@ -9,7 +9,7 @@ import um.fds.agl.ter23.entities.Teacher;
 public interface TeacherRepository extends UserBaseRepository<Teacher> {
     @Override
     @PreAuthorize("hasRole('ROLE_MANAGER') and (#teacher?.terManager == null or #teacher?.terManager?.lastName == authentication?.name)")
-    Teacher save(@Param("teacher") Teacher teacher);
+    <S extends Teacher> S save(@Param("teacher") S teacher);
 
     @Override
     @PreAuthorize("@teacherRepository.findById(#id).get()?.terManager?.lastName == authentication?.name")

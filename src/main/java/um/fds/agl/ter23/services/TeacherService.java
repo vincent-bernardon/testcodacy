@@ -5,16 +5,24 @@ import org.springframework.stereotype.Service;
 import um.fds.agl.ter23.entities.Teacher;
 import um.fds.agl.ter23.repositories.TeacherRepository;
 
-import java.util.Optional;
-
 @Service
 public class TeacherService {
 
     @Autowired
     private TeacherRepository teacherRepository;
 
-    public Optional<Teacher> getTeacher(final Long id) {
-        return teacherRepository.findById(id);
+    /**
+     * Get a teacher by id
+     * If the teacher does not exist, return null
+     * 
+     * @param id
+     * @return
+     */
+    public Teacher getTeacher(final Long id) {
+        if (!teacherRepository.existsById(id)) {
+            return null;
+        }
+        return teacherRepository.findById(id).get();
     }
 
     public Iterable<Teacher> getTeachers() {
@@ -28,10 +36,6 @@ public class TeacherService {
     public Teacher saveTeacher(Teacher teacher) {
         Teacher savedTeacher = teacherRepository.save(teacher);
         return savedTeacher;
-    }
-
-    public Optional<Teacher> findById(long id) {
-        return teacherRepository.findById(id);
     }
 
 }

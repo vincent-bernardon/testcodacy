@@ -5,17 +5,25 @@ import org.springframework.stereotype.Service;
 import um.fds.agl.ter23.entities.Student;
 import um.fds.agl.ter23.repositories.StudentRepository;
 
-import java.util.Optional;
-
-
 @Service
 public class StudentService {
 
     @Autowired
     private StudentRepository studentRepository;
 
-    public Optional<Student> getStudent(final Long id) {
-        return studentRepository.findById(id);
+    /**
+     * Get a student by id
+     * If the student does not exist, return null
+     * 
+     * @param id
+     * @return Student
+     */
+    public Student getStudent(final Long id) {
+
+        if (!studentRepository.existsById(id)) {
+            return null;
+        }
+        return studentRepository.findById(id).get();
     }
 
     public Iterable<Student> getStudents() {
@@ -31,7 +39,4 @@ public class StudentService {
         return savedStudent;
     }
 
-    public Optional<Student> findById(long id) {
-        return studentRepository.findById(id);
-    }
 }

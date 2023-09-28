@@ -8,7 +8,7 @@ public interface StudentRepository extends UserBaseRepository<Student> {
 
     @Override
     @PreAuthorize("hasRole('ROLE_MANAGER')")
-    Student save(@Param("student") Student student);
+    <S extends Student> S save(S student);
 
     @Override
     @PreAuthorize("hasRole('ROLE_MANAGER')")
