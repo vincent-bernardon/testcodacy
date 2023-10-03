@@ -39,7 +39,7 @@ public class Groupe {
     return title;
   }
 
-  public Iterable<Student> getStudents() {
+  public Set<Student> getStudents() {
     return students;
   }
 
