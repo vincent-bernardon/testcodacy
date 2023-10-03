@@ -9,7 +9,7 @@ import javax.persistence.ManyToMany;
 @Entity
 public class Student extends UserTER {
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "students")
     private Set<Groupe> groupes;
 
     public Student(String firstName, String lastName) {

@@ -1,8 +1,8 @@
 package um.fds.agl.ter23.entities;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
+import java.util.Iterator;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +15,7 @@ public class Groupe {
   private @Id @GeneratedValue Long id;
   private String title;
 
-  @ManyToMany
+  @ManyToMany()
   private Set<Student> students;
 
   public Groupe() {
@@ -39,7 +39,7 @@ public class Groupe {
     return title;
   }
 
-  public Set<Student> getStudents() {
+  public Iterable<Student> getStudents() {
     return students;
   }
 
