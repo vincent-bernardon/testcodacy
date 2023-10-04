@@ -25,8 +25,8 @@
         <td class="spaced">
           <span th:each="student : ${Groupe.students}" th:text="${student.lastName}"></span>
         </td>
-        <td><a th:href="@{/updateSubject/{id}(id=${Groupe.id})}">Update</a>
-          <a th:href="@{/deleteSubject/{id}(id=${Groupe.id})}">Delete</a>
+        <td><a th:href="@{/updateGroupe/{id}(id=${Groupe.id})}">Update</a>
+          <a th:href="@{/deleteGroupe/{id}(id=${Groupe.id})}">Delete</a>
         </td>
       </tr>
     </table>
