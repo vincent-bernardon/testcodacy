@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Update Groupe</title>
+  <link rel="stylesheet" href="/main.css" />
+</head>
+
+<body>
+  <h1>Update a Groupe: Not Implemented</h1>
+
+  <!--
+  <form th:action="@{/updateGroupe}" th:object="${groupeForm}" method="POST">
+    <input type="hidden" name="id" id="id" th:value="${groupe.id}" />
+    Title:
+    <input type="text" th:field="*{title}" th:placeholder="${groupe.title}" />
+    <br />
+    students:
+    <fieldset>
+      <div th:each="student: ${studentsList}">
+        <label for="${student.id}" th:text="${student.lastName}"></label>
+        <input type="checkbox" name="${student.id}" id="${student.id}" th:field="*{students}" th:value="${student.id}">
+      </div>
+    </fieldset>
+    <br />
+    <input type="submit" value="Update" />
+  </form>
+
+  <br />
+  -->
+
+  <!-- Check if errorMessage is not null and not empty -->
+
+  <div th:if="${errorMessage}" th:utext="${errorMessage}" style="color:red;font-style:italic;">
+    ...
+  </div>
+
+</body>
+
+</html>

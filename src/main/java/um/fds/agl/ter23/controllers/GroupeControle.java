@@ -63,4 +63,10 @@ public class GroupeControle {
     return "redirect:listGroupe";
   }
 
+  @RequestMapping(value = "/updateGroupe/{id}")
+  public String updateGroupePage(Model model) {
+
+    return "updateGroupe";
+  }
+
 }
