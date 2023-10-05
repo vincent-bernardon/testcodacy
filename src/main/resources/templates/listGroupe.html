@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>List Groupe</title>
+</head>
+
+<body>
+  <h1>List Groupe</h1>
+  <a href="/">Accueil</a>
+  <a href="addGroupe">Add Groupe</a>
+  <br /><br />
+  <div>
+    <table border="1">
+
+      <tr>
+        <th>Groupe Name</th>
+        <th>Students Names</th>
+        <th>option</th>
+      </tr>
+      <tr th:each="Groupe : ${Groupes}">
+        <td th:utext="${Groupe.title}">...</td>
+        <td class="spaced">
+          <span th:each="student : ${Groupe.students}" th:text="${student.lastName}"></span>
+        </td>
+        <td><a th:href="@{/updateGroupe/{id}(id=${Groupe.id})}">Update</a>
+          <a th:href="@{/deleteGroupe/{id}(id=${Groupe.id})}">Delete</a>
+        </td>
+      </tr>
+    </table>
+  </div>
+</body>
+<style>
+  .spaced {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+  }
+</style>
+
+</html>

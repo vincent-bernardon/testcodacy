@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Groupe</title>
+</head>
+
+<body>
+  <h1>Create a Groupe:</h1>
+
+  <form th:action="@{/addGroupe}" th:object="${groupeFrom}" method="POST">
+    First Name:
+    <input type="text" th:field="*{title}" />
+    <br />
+    <fieldset>
+      <div th:each="student: ${studentsList}">
+        <label for="${student.id}" th:text="${student.lastName}"></label>
+        <input type="checkbox" name="${student.id}" id="${student.id}" th:field="*{students}" th:value="${student.id}">
+      </div>
+    </fieldset>
+
+    <input type="submit" value="submit">
+  </form>
+
+  <br />
+
+  <!-- Check if errorMessage is not null and not empty -->
+
+  <div th:if="${errorMessage}" th:utext="${errorMessage}" style="color:red;font-style:italic;">
+    ...
+  </div>
+</body>
+
+</html>
