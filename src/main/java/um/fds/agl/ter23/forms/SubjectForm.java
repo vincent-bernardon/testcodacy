@@ -1,6 +1,6 @@
 package um.fds.agl.ter23.forms;
 
-import um.fds.agl.ter23.entities.TERManager;
+
 import um.fds.agl.ter23.entities.Teacher;
 
 public class SubjectForm {
