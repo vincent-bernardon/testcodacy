@@ -1,7 +1,5 @@
 package um.fds.agl.ter23.entities;
 
-import org.hibernate.annotations.ManyToAny;
-
 import javax.persistence.*;
 
 @Entity
